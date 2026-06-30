@@ -1,0 +1,6 @@
+name: VexiumEffectsSMP
+version: ${version}
+main: com.vexiumsmp.effects.VexiumEffectsPlugin
+api-version: '1.21'
+author: VexiumSMP
+description: Random positive effect progression system for VexiumSMP.
