@@ -77,8 +77,9 @@ public final class EffectsDatabase implements AutoCloseable {
             query.setString(1, uuid.toString());
             try (ResultSet results = query.executeQuery()) {
                 while (results.next()) {
-                    SmpEffect.fromId(results.getString("effect"))
-                            .ifPresent(effect -> effects.add(new PlayerEffect(effect, results.getInt("level"))));
+                    String effectId = results.getString("effect");
+                    int level = results.getInt("level");
+                    SmpEffect.fromId(effectId).ifPresent(effect -> effects.add(new PlayerEffect(effect, level)));
                 }
             }
         } catch (SQLException exception) {

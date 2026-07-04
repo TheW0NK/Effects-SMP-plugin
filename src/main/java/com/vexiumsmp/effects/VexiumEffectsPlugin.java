@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 
@@ -52,6 +53,13 @@ public final class VexiumEffectsPlugin extends JavaPlugin implements Listener {
         Player player = event.getPlayer();
         database.ensurePlayer(player);
         applyStoredEffects(player);
+    }
+
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
+        Player player = event.getPlayer();
+        database.ensurePlayer(player);
+        getServer().getScheduler().runTask(this, () -> applyStoredEffects(player));
     }
 
     @EventHandler
